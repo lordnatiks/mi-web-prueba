@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Nataly Herrera Cubillos</title>
+    <link rel="icon" href="../favicon-rat.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background: #0f0f0f;
+            color: #f0f0f0;
+        }
+
+        /* ─── HEADER / FOOTER ─────────────────────────────────────── */
+
+        .page-header,
+        .page-footer {
+            padding: 1.25rem 2.25rem;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .header-inner,
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* left block */
+        .hf-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .hf-left .name {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            line-height: 1.15;
+            text-transform: uppercase;
+        }
+
+        .hf-left .meta {
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
+            color: #aaa;
+            line-height: 1.5;
+            text-transform: uppercase;
+        }
+
+        /* center block */
+        .hf-center {
+            font-size: 0.6rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #666;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* right block */
+        .hf-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+
+        .hf-right .role {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-align: right;
+            line-height: 1.15;
+        }
+
+        .hf-right .contact {
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
+            color: #aaa;
+            text-align: right;
+            line-height: 1.5;
+            text-transform: uppercase;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 0.45rem;
+            margin-top: 0.2rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border: 1px solid #f0f0f0;
+            color: #f0f0f0;
+            text-decoration: none;
+            font-size: 0.55rem;
+            letter-spacing: 0;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .social-icons a:hover {
+            background: #f0f0f0;
+            color: #0f0f0f;
+        }
+
+        /* ─── GALLERY WRAPPER ─────────────────────────────────────── */
+
+        .gallery-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding: 3px 0;
+        }
+
+        /* ─── SECTION TYPES ───────────────────────────────────────── */
+
+        /* helper: image fills its slot */
+        .gallery-wrapper img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* full-width row */
+        .row-full {
+            width: 100%;
+            aspect-ratio: 16 / 7;
+            overflow: hidden;
+        }
+
+        /* 2-column rows */
+        .row-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3px;
+        }
+
+        .row-2col .cell {
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+        }
+
+        /* 4 squares row */
+        .row-4sq {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3px;
+        }
+
+        .row-4sq .cell {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+
+        /* full-width t-shirt row */
+        .row-full-tshirt {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+        }
+
+        /* 3-column portrait row */
+        .row-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+        }
+
+        .row-3col .cell {
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+        }
+
+        /* 2 large squares row */
+        .row-2sq {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3px;
+        }
+
+        .row-2sq .cell {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+
+        /* ─── RESPONSIVE ──────────────────────────────────────────── */
+
+        @media (max-width: 768px) {
+            .page-header, .page-footer {
+                padding: 1rem 1.25rem;
+            }
+
+            .hf-left .name,
+            .hf-right .role {
+                font-size: 0.75rem;
+            }
+
+            .row-4sq {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .row-3col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .row-3col .cell:last-child {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-inner,
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
+            }
+
+            .hf-center {
+                display: none;
+            }
+
+            .row-2col,
+            .row-2sq {
+                grid-template-columns: 1fr;
+            }
+
+            .row-2col .cell,
+            .row-2sq .cell {
+                aspect-ratio: 16 / 9;
+            }
+
+            .row-4sq {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .row-3col {
+                grid-template-columns: 1fr;
+            }
+
+            .row-3col .cell:last-child {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════ HEADER ══ -->
+    <header class="page-header">
+        <div class="header-inner">
+
+            <div class="hf-left">
+                <span class="name">NATALY<br>HERRERA CUBILLOS</span>
+                <span class="meta">× BOGOTÁ, COLOMBIA</span>
+            </div>
+
+            <div class="hf-center">— GRAPHIC DESIGNER —</div>
+
+            <div class="hf-right">
+                <span class="role">GRAPHIC<br>DESIGNER</span>
+                <span class="contact">NATALYNHC@GMAIL.COM<br>@RATALY.RAT</span>
+                <div class="social-icons">
+                    <a href="mailto:natalynhc@gmail.com" title="Email">@</a>
+                    <a href="https://www.behance.net/imcallednataly" title="Behance" target="_blank">Be</a>
+                    <a href="https://www.instagram.com/rataly.rat" title="Instagram" target="_blank">Ig</a>
+                    <a href="#" title="Contact">↗</a>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════ GALLERY ══ -->
+    <main class="gallery-wrapper">
+
+        <!-- ── S1: Banner completo ── -->
+        <div class="row-full">
+            <img src="./images/00_X6.png" alt="Welcome to Genesis Coalition – A Rebellion with Purpose">
+        </div>
+
+        <!-- ── S2: 2 columnas – Symbol Construction + Color Palette ── -->
+        <div class="row-2col">
+            <div class="cell">
+                <img src="./images/01_X8.png" alt="Symbol Construction – Genesis Coalition">
+            </div>
+            <div class="cell">
+                <img src="./images/02_X9.png" alt="Color Palette & Typography – Genesis Coalition">
+            </div>
+        </div>
+
+        <!-- ── S3: 2 columnas – Blueprint + Resultado Final ── -->
+        <div class="row-2col">
+            <div class="cell">
+                <img src="./images/03_X10.png" alt="Blueprint técnico – Visor">
+            </div>
+            <div class="cell">
+                <img src="./images/04_X11.jpg" alt="Resultado Final – Proyecto visor">
+            </div>
+        </div>
+
+        <!-- ── S4: 2 columnas – Consensus "I Was Selected" + AI Agent Workshop ── -->
+        <div class="row-2col">
+            <div class="cell">
+                <img src="./images/05_X12.png" alt="I Was Selected – Consensus Toronto, CoinDesk × BAF">
+            </div>
+            <div class="cell">
+                <img src="./images/06_X13.png" alt="AI Agent Workshop – NEAR × Blockchain at Georgia Tech × BAF">
+            </div>
+        </div>
+
+        <!-- ── S5: 4 cuadrados – BAF University Summit ── -->
+        <div class="row-4sq">
+            <div class="cell">
+                <img src="./images/09_X18.png" alt="The University Summit Kickoff – BAF × Protocol Labs">
+            </div>
+            <div class="cell">
+                <img src="./images/13_X22.png" alt="Build w/ AI: Hands On Workshop – BAF × Hedera">
+            </div>
+            <div class="cell">
+                <img src="./images/08_X16.png" alt="Start Here: Build & Market Your Project – BAF × Stellar">
+            </div>
+            <div class="cell">
+                <img src="./images/07_X14.png" alt="Consensus Hackathon Pitch Lab – BAF × Aptos">
+            </div>
+        </div>
+
+        <!-- ── S6: Banner completo – Camiseta BAF ── -->
+        <div class="row-full-tshirt">
+            <img src="./images/10_X19.png" alt="Don't wait for the future, create it now – BAF T-shirt">
+        </div>
+
+        <!-- ── S7: 3 columnas retrato – The Lobby / Meridian ── -->
+        <div class="row-3col">
+            <div class="cell">
+                <img src="./images/12_X21.png" alt="The Lobby – Diplomacias, portada">
+            </div>
+            <div class="cell">
+                <img src="./images/14_X24.png" alt="Meet Us at Meridian – Sep 15-18, 2025">
+            </div>
+            <div class="cell">
+                <img src="./images/11_X20.png" alt="The Lobby – Diplomacias, interior">
+            </div>
+        </div>
+
+        <!-- ── S8: 2 columnas – Visiones + Bogotá D.C. ── -->
+        <div class="row-2col">
+            <div class="cell">
+                <img src="./images/15_X25.png" alt="Visiones – mapa conceptual">
+            </div>
+            <div class="cell">
+                <img src="./images/16_X26.png" alt="Bogotá D.C. – La ciudad es, sobre todo, ciudadanía. Salmona 2005">
+            </div>
+        </div>
+
+        <!-- ── S9: 2 columnas – Blockchain en la Vida Real + Crypto más allá ── -->
+        <div class="row-2col">
+            <div class="cell">
+                <img src="./images/17_X27.jpg" alt="Blockchain en la Vida Real – Abraham Vega, Stellar × BAF, UAEM Morelos">
+            </div>
+            <div class="cell">
+                <img src="./images/19_X29.png" alt="Crypto Más Allá del Precio – Axel Becker, University Day">
+            </div>
+        </div>
+
+        <!-- ── S10: 2 cuadrados grandes – Hoodies ── -->
+        <div class="row-2sq">
+            <div class="cell">
+                <img src="./images/27_X37.png" alt="Black hoodie – espalda con estampado galaxia">
+            </div>
+            <div class="cell">
+                <img src="./images/28_X38.png" alt="Black hoodie – frente, minimal">
+            </div>
+        </div>
+
+        <!-- ── S11: 3 columnas retrato – Código Raíz Hackathon ── -->
+        <div class="row-3col">
+            <div class="cell">
+                <img src="./images/21_X31.png" alt="Código Raíz Hackathon – Stellar × BAF, Morelos México, Oct 28-30 2025">
+            </div>
+            <div class="cell">
+                <img src="./images/22_X32.png" alt="Live – Código Raíz Hackathon 2025">
+            </div>
+            <div class="cell">
+                <img src="./images/23_X33.png" alt="Resultados – Código Raíz Hackathon">
+            </div>
+        </div>
+
+        <!-- ── S12: 3 columnas retrato – Networking Rave / Coffee Rave ── -->
+        <div class="row-3col">
+            <div class="cell">
+                <img src="./images/26_X36.png" alt="Networking Rave Edition Line Up – Mucha Onda, EM, Salinas, 10/25">
+            </div>
+            <div class="cell">
+                <img src="./images/24_X34.png" alt="Coffee Rave – Stellar × BAF, 31/01">
+            </div>
+            <div class="cell">
+                <img src="./images/25_X35.png" alt="Networking Rave Edition – música en vivo, experiencias, blockchain, 10/25">
+            </div>
+        </div>
+
+        <!-- ── S13: 2 columnas – Impacta Bootcamp + Demo Day ── -->
+        <div class="row-2col">
+            <div class="cell">
+                <img src="./images/18_X28.png" alt="Impacta Bootcamp – Stellar × BAF, Latam, Ene 26 → Feb 27, 2026">
+            </div>
+            <div class="cell">
+                <img src="./images/20_X30.png" alt="Demo Day – Cierre de Impacta Bootcamp, 28 Feb 2026">
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════ FOOTER ══ -->
+    <footer class="page-footer">
+        <div class="footer-inner">
+
+            <div class="hf-left">
+                <span class="name">NATALY<br>HERRERA CUBILLOS</span>
+                <span class="meta">× CONTACT ME</span>
+            </div>
+
+            <div class="hf-center">— GRAPHIC DESIGNER —</div>
+
+            <div class="hf-right">
+                <span class="role">GRAPHIC<br>DESIGNER</span>
+                <span class="contact">NATALYNHC@GMAIL.COM<br>@RATALY.RAT</span>
+                <div class="social-icons">
+                    <a href="mailto:natalynhc@gmail.com" title="Email">@</a>
+                    <a href="https://www.behance.net/imcallednataly" title="Behance" target="_blank">Be</a>
+                    <a href="https://www.instagram.com/rataly.rat" title="Instagram" target="_blank">Ig</a>
+                    <a href="#" title="Contact">↗</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
